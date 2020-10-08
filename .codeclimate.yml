@@ -1,34 +1,11 @@
----
-engines:
-  csslint:
-    enabled: true
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - ruby
-      - javascript
-      - python
-      - php
-  eslint:
-    enabled: true
-  fixme:
-    enabled: true
-ratings:
-  paths:
-  - "**.css"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
-exclude_paths:
-  - "hooks/**/*"
-  - "plugins/**/*"
-  - "platforms/**/*"
-  - "www/cordova.js"
-  - "src/cordova.js"
-
-
+workflows:
+  cordova:
+    name: Apache Cordova
+    environment:
+      vars:
+        GRADLE_PATH: /Users/builder/programs/gradle-5.6.4/bin
+    scripts:
+     - sudo npm install -g cordova
+     - npm install
+     - cordova platform add android
+     - PATH=$PATH:$GRADLE_PATH cordova build android
